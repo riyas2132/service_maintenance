@@ -644,9 +644,9 @@ input[type="range"]::-webkit-slider-thumb {
     <script src="https://apis.google.com/js/api.js"></script>
     <script>
         const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
-        const SHEET_ID = '1lKVyHbfdfPTfEUJbt870PtZZJ3rZxULl3VAf6I_9eIk';
+        const SHEET_ID = '1LfA3-bI0-DvOF3-soO1mFg5oeLVLCApMmlnEaDwuw8U';
         const SHEET_RANGE = 'Tracker!A:AL';
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwVn60qmZEyiktJ8M7cdQVuNoJe8zZMAvEanxboNCd3v0c0tR-eZV4xCnsCEHP_Qv9z6Q/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4D9scnHdwtmeRnnYeD7ZTXKqtG0beBktaIsqHJFVIKB-NMaS_oEIJ3DbtDhV9d47F/exec';
 
         function updateWhatsAppLink() {
             const phoneNumber = document.getElementById('phone').value;
@@ -658,7 +658,7 @@ input[type="range"]::-webkit-slider-thumb {
                 const cleanPhone = phoneNumber.replace(/\D/g, '');
                 
                 // Create the tracking URL
-                const trackingUrl = `https://riyas2132.github.io/service_tracker/?tracking=${trackingNumber}`;
+                const trackingUrl = `https://riyas2132.github.io/service_maintenance/?tracking=${trackingNumber}`;
                 
                 // Create the WhatsApp message
                 const message = `To track your service status click the link ${trackingUrl}`;
