@@ -558,6 +558,14 @@
                             <label for="description" class="form-label">Description</label> 
 							<textarea id="description" class="form-input" rows="4"></textarea>
                         </div>
+						<div class="form-field">
+                            <label for="userid" class="form-label">User Id</label>
+                            <input type="text" id="userid" class="form-input" required>
+                        </div>
+						<div class="form-field">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" class="form-input" required>
+                        </div>
                     </div>
                     
                     <!-- File Upload Section -->
@@ -656,7 +664,7 @@
         const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
         const SHEET_ID = '1LfA3-bI0-DvOF3-soO1mFg5oeLVLCApMmlnEaDwuw8U';
         const SHEET_RANGE = 'Tracker!A:AL';
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4D9scnHdwtmeRnnYeD7ZTXKqtG0beBktaIsqHJFVIKB-NMaS_oEIJ3DbtDhV9d47F/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxWCZ6_M1eV5LOIdURzZUusdak1JcQQNbrogUET2FyQQX1YfNrLPaZ5bWuBA_qrkQyi/exec';
 
         document.addEventListener('DOMContentLoaded', function() {
             const editForm = document.getElementById('edit-form');
@@ -900,6 +908,9 @@
 					fileData1: document.getElementById('fileData1').value,
                     mimeType1: document.getElementById('mimeType1').value,
                     fileName1: document.getElementById('fileNameHidden1').value, 
+					
+					userid: document.getElementById('userid').value, 
+					password: document.getElementById('password').value, 
                     
                     status1 : 'Created',
                     status1Date: formattedDate,
