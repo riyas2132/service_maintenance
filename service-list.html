@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Service Tracking</title>
+    <title>Service Tracking List</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,6 +25,12 @@
             --green-100: #dcfce7;
             --green-500: #22c55e;
             --green-800: #166534;
+            --yellow-100: #fef9c3;
+            --yellow-500: #eab308;
+            --yellow-800: #854d0e;
+            --orange-100: #ffedd5;
+            --orange-500: #f97316;
+            --orange-800: #9a3412;
             --red-100: #fee2e2;
             --red-500: #ef4444;
             --red-800: #991b1b;
@@ -77,37 +83,24 @@
             padding: 2rem;
         }
 
-        .form-section {
-            margin-bottom: 2rem;
-        }
-
-        .form-section h2 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--gray-800);
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        .actions-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
             gap: 1rem;
         }
 
-        .form-field {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+        .search-container {
+            position: relative;
+            flex-grow: 1;
+            max-width: 30rem;
         }
 
-        .form-label {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--gray-700);
-        }
-
-        .form-input, .form-select {
-            padding: 0.75rem;
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            padding-left: 2.5rem;
             border: 1px solid var(--gray-200);
             border-radius: 0.5rem;
             font-size: 1rem;
@@ -115,112 +108,65 @@
             transition: all 0.2s;
         }
 
-        .form-input:focus, .form-select:focus {
+        .search-input:focus {
             outline: none;
             border-color: var(--blue-500);
             background: white;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        .status-grid {
-            display: grid;
-            gap: 0;
-            margin-top: 1rem;
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500);
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .status-filter {
+            padding: 0.5rem 1rem;
             border: 1px solid var(--gray-200);
             border-radius: 0.5rem;
-            overflow: hidden;
-        }
-
-        .status-row-header {
-            display: grid;
-            grid-template-columns: 2fr 1fr 3fr;
-            gap: 0;
-            background: var(--gray-100);
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        .status-row-header > div {
-            padding: 1rem;
+            background: white;
             font-size: 0.875rem;
-            font-weight: 600;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
             color: var(--gray-700);
-            border-right: 1px solid var(--gray-200);
         }
 
-        .status-row-header > div:last-child {
-            border-right: none;
-        }
-
-        .status-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr 3fr;
-            gap: 0;
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        .status-row:last-child {
-            border-bottom: none;
-        }
-
-        .status-row > * {
-            padding: 0.75rem;
-            border-right: 1px solid var(--gray-200);
-            border: none;
-            border-radius: 0;
-            background: white;
-        }
-
-        .status-row > *:last-child {
-            border-right: none;
-        }
-
-        .status-row .form-input,
-        .status-row .form-select {
-            background: white;
-            border: 1px solid var(--gray-200);
-            border-radius: 0.25rem;
-            margin: 0.25rem;
-        }
-
-        .status-row .form-input:focus,
-        .status-row .form-select:focus {
+        .status-filter:hover {
             border-color: var(--blue-500);
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
         }
 
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-            margin-top: 2rem;
+        .status-filter.active {
+            background: var(--blue-500);
+            border-color: var(--blue-500);
+            color: white;
         }
 
-        .button {
-            padding: 0.75rem 1.5rem;
+        .add-service-button {
+            padding: 0.5rem 1rem;
             border: none;
             border-radius: 0.375rem;
+            background: var(--blue-600);
+            color: white;
             font-size: 0.875rem;
             font-weight: 500;
             cursor: pointer;
             transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .save-button {
-            background: var(--blue-600);
-            color: white;
-        }
-
-        .save-button:hover {
+        .add-service-button:hover {
             background: var(--blue-700);
-        }
-
-        .cancel-button {
-            background: var(--gray-200);
-            color: var(--gray-800);
-        }
-
-        .cancel-button:hover {
-            background: var(--gray-300);
         }
 
         .loader {
@@ -247,35 +193,208 @@
             color: var(--red-800);
         }
 
-        .error-message.success {
-            background: var(--green-100);
-            color: var(--green-800);
+        .tracking-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .tracking-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tracking-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .tracking-number {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-delivered { background: var(--green-100); color: var(--green-800); }
+        .status-transit { background: var(--blue-100); color: var(--blue-700); }
+        .status-processing { background: var(--yellow-100); color: var(--yellow-800); }
+        .status-pending { background: var(--orange-100); color: var(--orange-800); }
+        .status-cancelled { background: var(--red-100); color: var(--red-800); }
+
+        .card-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 2rem;
+        }
+
+        .card-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .card-label {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+        }
+
+        .card-value {
+            font-weight: 500;
+        }
+
+        .card-image {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            margin-right: 1rem;
+        }
+
+        .progress-bar {
+            height: 0.375rem;
+            background: var(--gray-100);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--blue-500);
+            border-radius: 9999px;
+        }
+
+        .progress-text {
+            margin-top: 0.25rem;
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            text-align: right;
+        }
+
+        .view-button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            background: var(--blue-600);
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .view-button:hover {
+            background: var(--blue-700);
+        }
+
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .empty-icon {
+            margin-bottom: 1rem;
+            color: var(--gray-500);
+        }
+
+        .empty-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-message {
+            color: var(--gray-700);
+            margin-bottom: 1.5rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .page-button {
+            min-width: 2.5rem;
+            height: 2.5rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 0.375rem;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .page-button:hover {
+            border-color: var(--blue-500);
+            color: var(--blue-600);
+        }
+
+        .page-button.active {
+            background: var(--blue-500);
+            border-color: var(--blue-500);
+            color: white;
+        }
+
+        .page-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-dots {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            color: var(--gray-500);
         }
 
         @media (max-width: 768px) {
-            .status-row-header,
-            .status-row {
+            .card-content {
                 grid-template-columns: 1fr;
-            }
-            
-            .status-row-header > div,
-            .status-row > * {
-                border-right: none;
-                border-bottom: 1px solid var(--gray-200);
-            }
-            
-            .status-row-header > div:last-child,
-            .status-row > *:last-child {
-                border-bottom: none;
-            }
-
-            .status-row > div::before {
-                content: attr(data-label);
-                display: block;
-                font-size: 0.75rem;
-                font-weight: 500;
-                color: var(--gray-700);
-                margin-bottom: 0.25rem;
             }
         }
     </style>
@@ -283,61 +402,52 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Edit Service Tracking</h1>
-            <p>Modify tracking record details and status</p>
+            <h1>Service Tracking List</h1>
+            <p>View and manage all service tracking records</p>
         </div>
         
         <div class="content">
+            <div class="actions-bar">
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search by tracking number, name or email...">
+                    <div class="search-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                </div>
+                <div class="filter-container">
+                    <button class="status-filter active" data-status="all">All</button> 
+                </div>
+                <a href="add-service.html" class="add-service-button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Add New Service
+                </a>
+            </div>
+
             <div id="loader" class="loader"></div>
             <div id="errorMessage" class="error-message"></div>
             
-            <form id="edit-form">
-                <div class="form-section">
-                    <h2>Customer Details</h2>
-                    <div class="form-grid">
-                        <div class="form-field">
-                            <label for="trackingNumber" class="form-label">Tracking Number</label>
-                            <input type="text" id="trackingNumber" class="form-input" readonly>
-                        </div>
-                        <div class="form-field">
-                            <label for="customerName" class="form-label">Customer Name</label>
-                            <input type="text" id="customerName" class="form-input" required>
-                        </div>
-                        <div class="form-field">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" class="form-input">
-                        </div>
-                        <div class="form-field">
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="tel" id="phone" class="form-input">
-                        </div>
-                        <div class="form-field">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" id="address" class="form-input">
-                        </div>
-                        <div class="form-field">
-                            <label for="itemName" class="form-label">Service</label>
-                            <input type="text" id="itemName" class="form-input" required>
-                        </div>
-                        <div class="form-field">
-                            <label for="description" class="form-label">Description</label>
-                            <input type="text" id="description" class="form-input">
-                        </div>
-                    </div>
-                </div>
+            <div id="trackingList" class="tracking-list"></div>
 
-                <div class="form-section">
-                    <h2>Status History</h2>
-                    <div class="status-grid" id="statusGrid">
-                        <!-- Status rows will be dynamically generated -->
-                    </div>
+            <div id="emptyState" class="empty-state">
+                <div class="empty-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
                 </div>
+                <h3 class="empty-title">No Results Found</h3>
+                <p class="empty-message">Try adjusting your search or filter to find what you're looking for.</p>
+                <button id="resetFiltersButton" class="view-button">Reset Filters</button>
+            </div>
 
-                <div class="action-buttons">
-                    <button type="button" class="button cancel-button" onclick="window.location.href='index.html'">Cancel</button>
-                    <button type="submit" class="button save-button">Save Changes</button>
-                </div>
-            </form>
+            <div id="pagination" class="pagination"></div>
         </div>
     </div>
 
@@ -345,303 +455,441 @@
     <script>
         const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
         const SHEET_ID = '1lKVyHbfdfPTfEUJbt870PtZZJ3rZxULl3VAf6I_9eIk';
-        const SHEET_RANGE = 'Tracker!A:AL';
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSGsq2QrJGV-2jDA5dNlCER3U_HK8ssm9gZdZJN48kqRiF96hy-Ca0mvH8Mm_Y-e7HTw/exec';
-
+        const SHEET_RANGE = 'Tracker!A:AN';
+        
+        // Pagination settings
+        const ITEMS_PER_PAGE = 10;
+        
         document.addEventListener('DOMContentLoaded', function() {
-            const editForm = document.getElementById('edit-form');
+            const searchInput = document.getElementById('searchInput');
+            const statusFilters = document.querySelectorAll('.status-filter');
             const loader = document.getElementById('loader');
             const errorMessage = document.getElementById('errorMessage');
-            const statusGrid = document.getElementById('statusGrid');
-
-            // Get tracking number from URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const trackingNumber = urlParams.get('tracking') || '10002';
-
-            if (!trackingNumber) {
-                showError('No tracking number provided.');
-                return;
-            }
-
+            const trackingList = document.getElementById('trackingList');
+            const emptyState = document.getElementById('emptyState');
+            const resetFiltersButton = document.getElementById('resetFiltersButton');
+            const pagination = document.getElementById('pagination');
+            
+            // Store all tracking data
+            let allTrackingData = [];
+            let filteredData = [];
+            let currentPage = 1;
+            let activeStatus = 'all';
+            let searchQuery = '';
+            
             gapi.load('client', initClient);
-
+            
             function initClient() {
                 gapi.client.init({
                     'apiKey': API_KEY,
                     'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
                 }).then(() => {
-                    console.log('Google Sheets API initialized');
+                    console.log('Google Sheets API initialized successfully');
                     fetchTrackingData();
                 }).catch((error) => {
                     console.error('Error initializing Google Sheets API:', error);
-                    showError('Failed to initialize tracking system');
+                    showError(`Failed to initialize Google Sheets API: ${error.message || 'Unknown error'}`);
                 });
             }
-
+            
             async function fetchTrackingData() {
                 showLoader(true);
                 hideError();
-
+                
                 try {
                     const response = await gapi.client.sheets.spreadsheets.values.get({
                         spreadsheetId: SHEET_ID,
                         range: SHEET_RANGE,
                     });
-
+                    
                     const data = response.result.values;
-                    if (data && data.length > 1) {
-                        // Find the row with the matching tracking number
-                        const rowIndex = data.findIndex(row => row[0] === trackingNumber);
-                        if (rowIndex === -1) {
-                            showError('Tracking number not found.');
-                            return;
-                        }
-
-                        const row = data[rowIndex];
-                        populateForm(row, rowIndex + 1); // +1 to account for header row
-                    } else {
-                        showError('No data found in the spreadsheet.');
+                    console.log('Raw data from Google Sheets:', data); // Debugging
+                    
+                    if (!data || data.length === 0) {
+                        console.warn('No data returned from Google Sheet');
+                        showEmptyState(true);
+                        showError('No data found in the specified sheet range.');
+                        return;
                     }
+                    
+                    if (data.length === 1) {
+                        console.warn('Only header row found in Google Sheet');
+                        showEmptyState(true);
+                        showError('No tracking records found, only header row present.');
+                        return;
+                    }
+                    
+                    // Skip header row and map data
+                    allTrackingData = data.slice(1).map((row, index) => {
+                        console.log(`Processing row ${index + 1}:`, row); // Debugging
+                        return {
+                            trackingNumber: row[0] || '',
+                            name: row[1] || '',
+                            email: row[2] || '',
+                            phone: row[3] || '',
+                            address: row[4] || '',
+                            serviceType: row[5] || '',
+                            description: row[6] || '',
+                            status: getLastStatus(row),
+                            lastUpdate: row[8] || row[11] || row[14] || row[17] || row[20] || row[23] || row[26] || row[29] || row[32] || row[35] || '',
+                            percentComplete: parseInt(row[37]) || 0,
+                            imageId: row[38] || '',
+							imageId1: row[39] || '',
+                        };
+                    });
+                    
+                    // Sort data by lastUpdate in descending order
+                    allTrackingData.sort((a, b) => {
+                        const dateA = a.lastUpdate ? new Date(a.lastUpdate) : new Date(0);
+                        const dateB = b.lastUpdate ? new Date(b.lastUpdate) : new Date(0);
+                        return dateB - dateA || b.trackingNumber.localeCompare(a.trackingNumber);
+                    });
+                    
+                    console.log('Processed and sorted tracking data:', allTrackingData); // Debugging
+                    
+                    // Initial display with all data
+                    filteredData = [...allTrackingData];
+                    displayTrackingList();
                 } catch (error) {
-                    console.error('Error fetching data:', error);
-                    showError('An error occurred while loading tracking data.');
+                    console.error('Error fetching data from Google Sheets:', error);
+                    showError(`Failed to load tracking data: ${error.message || 'Unknown error'}`);
+                    showEmptyState(true);
                 } finally {
                     showLoader(false);
                 }
             }
-
-            function populateForm(row, rowIndex) {
-                // Populate customer details
-                document.getElementById('trackingNumber').value = row[0] || '';
-                document.getElementById('customerName').value = row[1] || '';
-                document.getElementById('email').value = row[2] || '';
-                document.getElementById('phone').value = row[3] || '';
-                document.getElementById('address').value = row[4] || '';
-                document.getElementById('itemName').value = row[5] || '';
-                document.getElementById('description').value = row[6] || '';
-
-                // Populate status history
-                const statusColumns = [
-                    { status: 7, date: 8, remarks: 9 },
-                    { status: 10, date: 11, remarks: 12 },
-                    { status: 13, date: 14, remarks: 15 },
-                    { status: 16, date: 17, remarks: 18 },
-                    { status: 19, date: 20, remarks: 21 },
-                    { status: 22, date: 23, remarks: 24 },
-                    { status: 25, date: 26, remarks: 27 },
-                    { status: 28, date: 29, remarks: 30 },
-                    { status: 31, date: 32, remarks: 33 },
-                    { status: 34, date: 35, remarks: 36 }
-                ];
-
-                // Create header row
-                const headerRow = document.createElement('div');
-                headerRow.className = 'status-row-header';
-                headerRow.innerHTML = `
-                    <div>Status</div>
-                    <div>Date</div>
-                    <div>Remarks</div>
-                `;
-                statusGrid.appendChild(headerRow);
-
-                statusColumns.forEach((col, index) => {
-                    const statusRow = document.createElement('div');
-                    statusRow.className = 'status-row';
-
-                    const statusCell = document.createElement('div');
-                    statusCell.dataset.label = 'Status';
-                    const statusInput = document.createElement('input');
-                    statusInput.type = 'text';
-                    statusInput.className = 'form-input';
-                    statusInput.id = `status${index + 1}`;
-                    statusInput.name = `status${index + 1}`;
-                    statusInput.value = row[col.status] || '';
-                    statusInput.placeholder = 'Enter status...';
-                    statusCell.appendChild(statusInput);
-
-                    const dateCell = document.createElement('div');
-                    dateCell.dataset.label = 'Date';
-                    const dateInput = document.createElement('input');
-                    dateInput.type = 'date';
-                    dateInput.className = 'form-input';
-                    dateInput.id = `status${index + 1}Date`;
-                    dateInput.name = `status${index + 1}Date`;
-                    dateInput.value = row[col.date] ? formatDateForInput(row[col.date]) : '';
-                    dateCell.appendChild(dateInput);
-
-                    const remarksCell = document.createElement('div');
-                    remarksCell.dataset.label = 'Remarks';
-                    const remarksInput = document.createElement('input');
-                    remarksInput.type = 'text';
-                    remarksInput.className = 'form-input';
-                    remarksInput.id = `status${index + 1}Remarks`;
-                    remarksInput.name = `status${index + 1}Remarks`;
-                    remarksInput.value = row[col.remarks] || '';
-                    remarksInput.placeholder = 'Enter remarks...';
-                    remarksCell.appendChild(remarksInput);
-
-                    statusRow.appendChild(statusCell);
-                    statusRow.appendChild(dateCell);
-                    statusRow.appendChild(remarksCell);
-                    statusGrid.appendChild(statusRow);
+            
+            function getLastStatus(row) {
+                const statusColumns = [7, 10, 13, 16, 19, 22, 25, 28, 31, 34];
+                for (let i = statusColumns.length - 1; i >= 0; i--) {
+                    if (row[statusColumns[i]]) {
+                        return row[statusColumns[i]];
+                    }
+                }
+                return 'No Status';
+            }
+            
+            function getLastDate(row) {
+                const dateColumns = [8, 11, 14, 17, 20, 23, 26, 29, 32, 35];
+                for (let i = dateColumns.length - 1; i >= 0; i--) {
+                    if (row[dateColumns[i]]) {
+                        return row[dateColumns[i]];
+                    }
+                }
+                return '';
+            }
+            
+            function displayTrackingList() {
+                // Calculate pagination
+                const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+                const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+                const endIndex = startIndex + ITEMS_PER_PAGE;
+                const currentPageData = filteredData.slice(startIndex, endIndex);
+                
+                console.log('Current page data:', currentPageData); // Debugging
+                
+                if (currentPageData.length === 0) {
+                    showEmptyState(true);
+                    return;
+                }
+                
+                showEmptyState(false);
+                trackingList.innerHTML = '';
+                
+                currentPageData.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'tracking-card';
+                    card.setAttribute('data-tracking', item.trackingNumber);
+                    card.style.animationDelay = `${index * 0.05}s`;
+                    
+                    // Get status class
+                    const statusClass = getStatusClass(item.status);
+                    
+                    // Construct image URL if imageId exists
+                    const imageUrl = item.imageId ? `https://drive.google.com/thumbnail?id=${item.imageId}&sz=w200-h200` : '';
+					 
+                    // Construct image URL if imageId exists
+                    const imageUrl1 = item.imageId1 ? `https://drive.google.com/thumbnail?id=${item.imageId1}&sz=w200-h200` : '';
+					 
+                    
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <h3 class="tracking-number">#${item.trackingNumber}</h3>
+                            <span class="status-badge ${statusClass}">${item.status}</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-field">
+                                <span class="card-label">Customer</span>
+                                <span class="card-value">${item.name}</span>
+                            </div>
+                            <div class="card-field">
+                                <span class="card-label">Service Type</span>
+                                <span class="card-value">${item.serviceType}</span>
+                            </div>
+                            <div class="card-field">
+                                <span class="card-label">Contact</span>
+                                <span class="card-value">${item.phone}</span>
+                            </div>
+                            <div class="card-field">
+                                <span class="card-label">Email</span>
+                                <span class="card-value">${item.email}</span>
+                            </div>
+                            <div class="card-field">
+                                <span class="card-label">Last Update</span>
+                                <span class="card-value">${item.lastUpdate || 'N/A'}</span>
+                            </div>
+                            <div class="card-field">
+								<span class="card-label">Image</span>
+								${imageUrl ? `<img src="${imageUrl}" alt="Service Image" class="card-image" onerror="this.style.display='none'">` : '<span class="card-value">No image available</span>'}
+							</div>
+							
+							<div class="card-field">
+								<span class="card-label">Image</span>
+								${imageUrl1 ? `<img src="${imageUrl1}" alt="Service Image" class="card-image" onerror="this.style.display='none'">` : '<span class="card-value">No image available</span>'}
+							</div>
+							
+                        </div>
+                        <div class="card-footer">
+                            <div class="progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${item.percentComplete}%"></div>
+                                </div>
+                                <div class="progress-text">${item.percentComplete}% Complete</div>
+                            </div>
+                            <button class="view-button" data-tracking="${item.trackingNumber}">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                View Details
+                            </button>
+                        </div>
+                    `;
+                    
+                    trackingList.appendChild(card);
                 });
-
-                // Store rowIndex for saving
-                editForm.dataset.rowIndex = rowIndex;
+                
+                // Add event listeners for cards and buttons
+                document.querySelectorAll('.tracking-card').forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        if (!e.target.classList.contains('view-button')) {
+                            const trackingNumber = this.getAttribute('data-tracking');
+                            navigateToTrackingDetails(trackingNumber);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.view-button').forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const trackingNumber = this.getAttribute('data-tracking');
+                        navigateToTrackingDetails(trackingNumber);
+                    });
+                });
+                
+                // Update pagination
+                renderPagination(totalPages);
             }
-
-            function formatDateForInput(dateStr) {
-                // Convert DD-MM-YYYY to YYYY-MM-DD for input[type=date]
-                if (!dateStr) return '';
-                const [day, month, year] = dateStr.split('-');
-                return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+            
+            function navigateToTrackingDetails(trackingNumber) {
+                window.location.href = `edit-service.html?tracking=${trackingNumber}`;
             }
-
-            function formatDateForSheet(dateStr) {
-                // Convert YYYY-MM-DD to DD-MM-YYYY for Google Sheet
-                if (!dateStr) return '';
-                const [year, month, day] = dateStr.split('-');
-                return `${day}-${month}-${year}`;
+            
+            function renderPagination(totalPages) {
+                if (totalPages <= 1) {
+                    pagination.style.display = 'none';
+                    return;
+                }
+                
+                pagination.style.display = 'flex';
+                pagination.innerHTML = '';
+                
+                // Previous button
+                const prevButton = document.createElement('button');
+                prevButton.className = 'page-button';
+                prevButton.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                `;
+                prevButton.disabled = currentPage === 1;
+                prevButton.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        displayTrackingList();
+                    }
+                });
+                pagination.appendChild(prevButton);
+                
+                // Page numbers
+                const maxVisiblePages = 5;
+                let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+                let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+                
+                if (endPage - startPage + 1 < maxVisiblePages) {
+                    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+                }
+                
+                if (startPage > 1) {
+                    const firstPageBtn = document.createElement('button');
+                    firstPageBtn.className = 'page-button';
+                    firstPageBtn.textContent = '1';
+                    firstPageBtn.addEventListener('click', () => {
+                        currentPage = 1;
+                        displayTrackingList();
+                    });
+                    pagination.appendChild(firstPageBtn);
+                    
+                    if (startPage > 2) {
+                        const dotsElem = document.createElement('div');
+                        dotsElem.className = 'page-dots';
+                        dotsElem.textContent = '...';
+                        pagination.appendChild(dotsElem);
+                    }
+                }
+                
+                for (let i = startPage; i <= endPage; i++) {
+                    const pageBtn = document.createElement('button');
+                    pageBtn.className = `page-button ${i === currentPage ? 'active' : ''}`;
+                    pageBtn.textContent = i;
+                    pageBtn.addEventListener('click', () => {
+                        currentPage = i;
+                        displayTrackingList();
+                    });
+                    pagination.appendChild(pageBtn);
+                }
+                
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                        const dotsElem = document.createElement('div');
+                        dotsElem.className = 'page-dots';
+                        dotsElem.textContent = '...';
+                        pagination.appendChild(dotsElem);
+                    }
+                    
+                    const lastPageBtn = document.createElement('button');
+                    lastPageBtn.className = 'page-button';
+                    lastPageBtn.textContent = totalPages;
+                    lastPageBtn.addEventListener('click', () => {
+                        currentPage = totalPages;
+                        displayTrackingList();
+                    });
+                    pagination.appendChild(lastPageBtn);
+                }
+                
+                // Next button
+                const nextButton = document.createElement('button');
+                nextButton.className = 'page-button';
+                nextButton.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                `;
+                nextButton.disabled = currentPage === totalPages;
+                nextButton.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        displayTrackingList();
+                    }
+                });
+                pagination.appendChild(nextButton);
             }
-
+            
+            function filterData() {
+                currentPage = 1;
+                
+                filteredData = allTrackingData.filter(item => {
+                    // Filter by status
+                    if (activeStatus !== 'all') {
+                        const statusLower = item.status.toLowerCase();
+                        if (!statusLower.includes(activeStatus)) {
+                            return false;
+                        }
+                    }
+                    
+                    // Filter by search query
+                    if (searchQuery) {
+                        const query = searchQuery.toLowerCase();
+                        return (
+                            item.trackingNumber.toLowerCase().includes(query) ||
+                            item.name.toLowerCase().includes(query) ||
+                            item.email.toLowerCase().includes(query) ||
+                            item.phone.toLowerCase().includes(query) ||
+                            item.serviceType.toLowerCase().includes(query)
+                        );
+                    }
+                    
+                    return true;
+                });
+                
+                console.log('Filtered data:', filteredData); // Debugging
+                displayTrackingList();
+            }
+            
+            function getStatusClass(status) {
+                const statusLower = status.toLowerCase();
+                if (statusLower.includes('delivered')) return 'status-delivered';
+                if (statusLower.includes('transit')) return 'status-transit';
+                if (statusLower.includes('processing')) return 'status-processing';
+                if (statusLower.includes('pending')) return 'status-pending';
+                if (statusLower.includes('cancelled')) return 'status-cancelled';
+                return '';
+            }
+            
             function showLoader(show) {
                 loader.style.display = show ? 'block' : 'none';
             }
-
+            
             function showError(message) {
                 errorMessage.textContent = message;
-                errorMessage.className = 'error-message';
                 errorMessage.style.display = 'block';
             }
-
+            
             function hideError() {
                 errorMessage.style.display = 'none';
             }
-
-            // Handle form submission
-            editForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const statusDiv = document.getElementById('errorMessage');
-
-                // Validate required fields
-                const customerName = document.getElementById('customerName').value;
-                const itemName = document.getElementById('itemName').value;
-                if (!customerName || !itemName) {
-                    statusDiv.className = 'error-message';
-                    statusDiv.textContent = 'Please fill in all required fields.';
-                    statusDiv.style.display = 'block';
-                    return;
-                }
-
-                // Show loading
-                statusDiv.className = 'error-message';
-                statusDiv.textContent = 'Saving changes...';
-                statusDiv.style.display = 'block';
-
-                // Get form data
-                const formData = {
-                    trackingnumber: document.getElementById('trackingNumber').value,
-                    customerName: customerName,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    address: document.getElementById('address').value,
-                    itemName: itemName,
-                    description: document.getElementById('description').value,
-                    rowIndex: this.dataset.rowIndex,
-                    action: 'updateform'
-                };
-
-                // Dynamically collect all 10 statuses, dates, and remarks
-                for (let i = 1; i <= 10; i++) {
-                    const statusInput = document.getElementById(`status${i}`);
-                    const dateInput = document.getElementById(`status${i}Date`);
-                    const remarksInput = document.getElementById(`status${i}Remarks`);
-
-                    formData[`status${i}`] = statusInput ? statusInput.value : '';
-                    formData[`status${i}Date`] = dateInput ? formatDateForSheet(dateInput.value) : '';
-                    formData[`status${i}Remarks`] = remarksInput ? remarksInput.value : '';
-                }
-
-                // Log the ID we're updating
-                console.log('Updating tracking with ID:', formData.trackingNumber);
-
-                // Log request details
-                console.log('Sending JSON request to:', APPS_SCRIPT_URL);
-                console.log('JSON payload:', JSON.stringify(formData));
-
-                // Try JSON request first
-                fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(formData),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    mode: 'cors'
-                })
-                .then(response => {
-                    console.log('JSON response status:', response.status, response.statusText);
-                    return response.text().then(text => ({ response, text }));
-                })
-                .then(({ response, text }) => {
-                    console.log('Raw response (JSON):', text);
-                    try {
-                        const data = JSON.parse(text);
-                        if (data.status === 'success') {
-                            statusDiv.className = 'error-message success';
-                            statusDiv.textContent = 'Changes saved successfully!';
-                            setTimeout(() => {
-                                statusDiv.style.display = 'none';
-                            }, 3000);
-                        } else {
-                            throw new Error(data.message || 'Failed to save changes');
-                        }
-                    } catch (error) {
-                        throw new Error(`Invalid JSON response: ${text}`);
-                    }
-                })
-                .catch(error => {
-                    console.error('JSON request failed:', error);
-                    statusDiv.textContent = 'JSON request failed, trying FormData...';
-
-                    // Fallback to FormData request
-                    const formDataObj = new FormData();
-                    for (const [key, value] of Object.entries(formData)) {
-                        formDataObj.append(key, value);
-                    }
-
-                    console.log('Sending FormData request to:', APPS_SCRIPT_URL);
-                    fetch(APPS_SCRIPT_URL, {
-                        method: 'POST',
-                        body: formDataObj,
-                        mode: 'cors'
-                    })
-                    .then(response => {
-                        console.log('FormData response status:', response.status, response.statusText);
-                        return response.text().then(text => ({ response, text }));
-                    })
-                    .then(({ response, text }) => {
-                        console.log('Raw response (FormData):', text);
-                        try {
-                            const data = JSON.parse(text);
-                            if (data.status === 'success') {
-                                statusDiv.className = 'error-message success';
-                                statusDiv.textContent = 'Changes saved successfully!';
-                                setTimeout(() => {
-                                    statusDiv.style.display = 'none';
-                                }, 3000);
-                            } else {
-                                throw new Error(data.message || 'Failed to save changes');
-                            }
-                        } catch (error) {
-                            throw new Error(`Invalid JSON response: ${text}`);
-                        }
-                    })
-                    .catch(formDataError => {
-                        console.error('FormData request failed:', formDataError);
-                        statusDiv.className = 'error-message';
-                        statusDiv.textContent = 'Error saving changes: ' + formDataError.message;
+            
+            function showEmptyState(show) {
+                emptyState.style.display = show ? 'block' : 'none';
+                trackingList.style.display = show ? 'none' : 'grid';
+            }
+            
+            // Event listeners
+            searchInput.addEventListener('input', function() {
+                searchQuery = this.value.trim();
+                filterData();
+            });
+            
+            statusFilters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    // Update active status
+                    activeStatus = this.getAttribute('data-status');
+                    
+                    // Update active class
+                    document.querySelectorAll('.status-filter').forEach(btn => {
+                        btn.classList.remove('active');
                     });
+                    this.classList.add('active');
+                    
+                    filterData();
                 });
+            });
+            
+            resetFiltersButton.addEventListener('click', function() {
+                // Reset filters
+                searchInput.value = '';
+                searchQuery = '';
+                activeStatus = 'all';
+                
+                // Reset active status button
+                document.querySelectorAll('.status-filter').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('data-status') === 'all') {
+                        btn.classList.add('active');
+                    }
+                });
+                
+                filterData();
             });
         });
     </script>
